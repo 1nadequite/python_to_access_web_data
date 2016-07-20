@@ -8,13 +8,10 @@ fhand = urllib.urlopen(loc).read() # read XML from this loc
 print 'Retrieved', len(fhand), 'characters' # print numbers of characters
 
 tree = ET.fromstring(fhand) # create XML scheme (tree)
-counts = tree.findall('comments/comment') # take all 'comment' from 'comments'
+counts = tree.findall('.//count') # take all 'comment' from 'comments'
+print 'Count:', len(counts)
 
-count = 0
 s = 0
 for comm in counts:
-    count += 1
-    s += int(comm.find('count').text) # sum
-
-print 'Count:', count
+    s += int(comm.text) # sum
 print 'Sum:', s
